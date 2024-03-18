@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="https://hlbhamt.com/wp-content/uploads/2019/01/cropped-HLB.-1-192x192.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+	
+<body>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-toggle" onclick="toggleSidebar()"><i class="fa fa-bars"></i><span class="sidebar-text">Menu</span></div>
+    <div class="sidebar-item" onclick="showContent('home')"><i class="fa fa-home"></i><span class="sidebar-text">Home</span></div>
+    <div class="sidebar-item" onclick="showContent('hrOutsourcing')"><i class="fa fa-users"></i><span class="sidebar-text">HR Outsourcing Services</span></div>
+    <div class="sidebar-item" onclick="showContent('hrCompliance')"><i class="fa fa-gavel"></i><span class="sidebar-text">HR Compliance Services</span></div>
+    <div class="sidebar-item" onclick="showContent('hrTechnology')"><i class="fa fa-cogs"></i><span class="sidebar-text">HR Technology Services</span></div>
+    <div class="sidebar-item" onclick="showContent('specializedServices')"><i class="fa fa-briefcase"></i><span class="sidebar-text">Specialized Services</span></div>
+    <div class="sidebar-item" onclick="showContent('otherServices')"><i class="fa fa-globe"></i><span class="sidebar-text">Other Services</span></div>
+  </div>
+  
+  <div id="main-content">
+    <h2>Welcome to HLB HR Services!</h2>	
+  </div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 HLB Hamt. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:info@hlbhamt.com">info@hlbhamt.com</a>.</p>
+  </div>
+</footer>
+
+<script>
+
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.getElementById('main-content');
+
+function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('expanded');
+}
+
+function showContent(contentId) {
+  mainContent.innerHTML = '';
+  
+  const contentTitle = document.createElement('h2');
+  contentTitle.textContent = contentId.replace(/([A-Z])/g, ' $1').trim(); // Format the title
+  mainContent.appendChild(contentTitle);
+
+  const gridContainer = document.createElement('div');
+  gridContainer.className = 'content-grid';
+
+  
+  const services = {
+    'hrOutsourcing': [
+    { name: 'Payroll Processing Services', icon: 'fa-calculator' },
+    { name: 'HR Consulting Services', icon: 'fa-comments' },
+    { name: 'Emiratization Regulations Advisory', icon: 'fa-globe' },
+    { name: 'Government Department Liaising', icon: 'fa-university' },
+    { name: 'Benefits Administration', icon: 'fa-briefcase', subitems: [
+        'Social Security and Pension Contributions',
+        'Benefit Enrolment',
+        'Employee End of Service Benefits'
+      ]
+    },
+    { name: 'Recruitment Process Outsourcing (RPO)', icon: 'fa-user-plus' },
+    { name: 'Employee Onboarding/Offboarding', icon: 'fa-users', subitems: [
+        'Hiring/Termination Guidelines',
+        'Work Permits',
+        'Employer Reference Checks'
+      ]
+    },
+    { name: 'Employee Contracts & Employment Administration', icon: 'fa-file-text' },
+    { name: 'Visa Advisory Services', icon: 'fa-plane' },
+    { name: 'PRO Services', icon: 'fa-handshake-o' },
+    { name: 'Medical Fitness Test', icon: 'fa-heartbeat' },
+  ],
+   'hrTechnology': [
+      { name: 'Executive Dashboard', icon: 'fa-tachometer' },
+      { name: 'Departmental Dashboards', icon: 'fa-columns' },
+      { name: 'Strategic Planning Tools', icon: 'fa-lightbulb-o' },
+      { name: 'Project Management Suite', icon: 'fa-tasks' },
+      { name: 'Knowledge Management System', icon: 'fa-book' },
+      { name: 'Communication and Collaboration Platform', icon: 'fa-comments-o' },
+      { name: 'Performance Analytics and Reporting', icon: 'fa-line-chart' },
+      { name: 'Employee Engagement and Feedback', icon: 'fa-users' },
+      { name: 'Training and Development Portal', icon: 'fa-graduation-cap' },
+      { name: 'Compliance Management System', icon: 'fa-gavel' },
+      { name: 'Financial Management Tools', icon: 'fa-money' },
+      { name: 'Customer Relationship Management (CRM)', icon: 'fa-address-book-o' },
+      // Add other categories and sub-categories as needed
+    ],
+  'hrCompliance': [
+    { name: 'Labor Law Compliance', icon: 'fa-balance-scale' },
+    { name: 'Compensation and Benefits Compliance', icon: 'fa-dollar' },
+    { name: 'Regulatory Compliance', icon: 'fa-gavel' },
+  ],
+  'specializedServices': [
+    { name: 'Secretarial Services', icon: 'fa-user-secret' },
+    { name: 'Employee Assistance Programs (EAP)', icon: 'fa-user-md' },
+  ],
+  'otherServices': [
+    { name: 'Dedicated HR Partner', icon: 'fa-user' },
+    { name: 'Employee File Management', icon: 'fa-folder-open' },
+  ],
+};
+
+    (services[contentId] || []).forEach(subCategory => {
+    const gridItem = document.createElement('div');
+    gridItem.className = 'grid-item';
+    gridItem.innerHTML = `<i class="fa ${subCategory.icon}"></i><span>${subCategory.name}</span>`;
+
+    if (subCategory.subitems && subCategory.subitems.length > 0) {
+    const subItemsContainer = document.createElement('div');
+    subItemsContainer.className = 'sub-items-container';
+
+    const toggleSubItemsBtn = document.createElement('button');
+    toggleSubItemsBtn.textContent = 'Show More';
+
+    toggleSubItemsBtn.onclick = () => {
+    const isHidden = subItemsContainer.style.display === 'none' || subItemsContainer.style.display === '';
+    subItemsContainer.style.display = isHidden ? 'block' : 'none';
+    subItemsContainer.classList.toggle('expanded', isHidden);
+    toggleSubItemsBtn.textContent = isHidden ? 'Show Less' : 'Show More';
+};
+
+    subItemsContainer.style.display = 'none';
+    
+    subCategory.subitems.forEach(subItem => {
+    const subItemDiv = document.createElement('div');
+    subItemDiv.textContent = subItem;
+    subItemsContainer.appendChild(subItemDiv);
+});
+    
+    gridItem.appendChild(toggleSubItemsBtn);
+    gridItem.appendChild(subItemsContainer);
+}
+    
+    gridContainer.appendChild(gridItem);
+});
+
+    mainContent.appendChild(gridContainer);
+}
+  
+function getIconForService(service) {
+switch (service) {
+        case 'hrOutsourcing': return 'fa-money';
+        case 'hrCompliance': return 'fa-balance-scale';
+        case 'hrTechnology': return 'fa-cogs';
+        case 'specializedServices': return 'fa-briefcase';
+        case 'otherServices': return 'fa-globe';
+        default: return 'fa-info-circle';
+      }
+}
+
+</script>
+
+<style>
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.sidebar {
+  background-color: #005977;
+  Initial width: 55px;
+  height: 100%;
+  position: fixed;
+  overflow-x: auto;
+  overflow-y: auto:
+  transition: width 0.5s ease; 
+  z-index: 2;
+}
+
+.sidebar.expanded {
+  Expanded width: 260px; 
+}
+
+.sidebar-item, .sidebar-toggle {
+  color: white;
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: center;
+}
+
+.sidebar-item:hover, .sidebar-toggle:hover {
+  background-color: transparent; 
+}
+
+.sidebar-text {
+  display: none; 
+}
+
+.sidebar.expanded .sidebar-text {
+  display: inline; 
+  white-space: nowrap; 
+  margin-left: 15px; 
+}
+
+#main-content {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  margin-left: 50px;
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.5s ease;
+  background: #f5f5f5;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+#main-content::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+}
+
+#main-content::-webkit-scrollbar-thumb {
+  background-color: #005977; /* Adjust the color to match your design */
+  border-radius: 4px; /* Optional: round the corners of the scrollbar thumb */
+}
+
+.sidebar.expanded ~ #main-content {
+  margin-left: 260px; 
+}
+
+.content-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      grid-template-rows: repeat(3, auto); 
+      grid-gap: 20px; 
+      padding: 20px;
+    }
+
+.grid-item {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+.grid-item i {
+      font-size: 2em; 
+      margin-bottom: 10px;
+    }
+
+#main-content h2 {
+      font-family: 'Montserrat', sans-serif; 
+      text-transform: uppercase; 
+      
+    }
+
+.footer {
+  background-color: #005977;
+  color: white;
+  text-align: center;
+  padding: 1px 0; 
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.6em; 
+}
+
+.footer .container {
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+.footer a:hover {
+    text-decoration: underline;
+  }
+
+#main-content {
+  padding-bottom: 60px; 
+}
+
+.sub-items-container {
+  margin-top: 10px;
+  padding-left: 20px;
+  background-color: #e9ecef; 
+  border-left: 3px solid #005977;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto; 
+  overflow-y: auto;
+  transition: max-height 0.5s ease-out; 
+  max-height: 200px; 
+}
+
+.sub-items-container ul {
+  list-style-type: none; 
+  padding: 0;
+}
+
+.sub-items-container li {
+  padding: 5px 0; 
+  font-size: 0.9em; 
+}
+
+.sub-items-container.expanded {
+  max-height: 500px; 
+}
+
+.grid-item button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background-color: #005977; 
+  color: white;
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+}
+
+.grid-item button:hover {
+  background-color: #004156; 
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 40px; 
+  }
+
+  .sidebar.expanded {
+    width: 200px; 
+  }
+
+  #main-content {
+    margin-left: 40px;
+    max-height: 80vh;
+  }
+
+  .sidebar.expanded ~ #main-content {
+    margin-left: 200px; 
+  }
+
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+
+
+</style>
+
+</body>
+</html>

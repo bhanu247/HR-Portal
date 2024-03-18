@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HLB HR Login</title>
+<link rel="icon" type="image/png" sizes="192x192" href="https://hlbhamt.com/wp-content/uploads/2019/01/cropped-HLB.-1-192x192.png">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  body, html {
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    margin: 0;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .login-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-logo img {
+    max-width: 120px;
+    display: block;
+    margin: 0 auto 1.5rem;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #005977;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .login-form button:hover {
+    background-color: #004d66;
+  }
+
+  .login-links {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .login-links a {
+    color: #005977;
+    text-decoration: none;
+  }
+
+  .login-links a:hover {
+    text-decoration: underline;
+  }
+
+  .login-remember-me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-right: 5px;
+  }
+
+  .forgot-password {
+    color: #005977;
+    text-decoration: none;
+  }
+
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+
+.footer {
+  background-color: #005977;
+  color: white;
+  text-align: center;
+  padding: 1px 0; /* Reduced padding for a smaller height */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.6em; /* Optionally, reduce the font size for the text inside the footer */
+}
+
+.footer .container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-logo">
+    <img src="download.png" alt="HLB HR Logo">
+  </div>
+  <form class="login-form" onsubmit="return validateLogin()">
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <div class="login-remember-me">
+      <label class="checkbox-label">
+        <input type="checkbox" name="remember" id="remember"> Remember Me
+      </label>
+      <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+    </div>
+    <button type="submit">LOGIN</button>
+    <div class="login-links">
+      New User? <a href="registration.html">Click here to register.</a>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 HLB Hamt. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:info@hlbhamt.com">info@hlbhamt.com</a>.</p>
+  </div>
+</footer>
+
+
+<script>
+  function validateLogin() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    var dummyEmail = "bhanu.p@hlbhamt.com";
+    var dummyPassword = "Apple@9211";
+
+    if(email === dummyEmail && password === dummyPassword) {
+      window.location.href = 'dashboard.html'; // Redirect to the dashboard page
+      return false; // Prevent default form submission
+    } else {
+      alert('Invalid Credentials'); // User feedback
+      return false; // Prevent default form submission
+    }
+  }
+</script>
+
+</body>
+</html>
